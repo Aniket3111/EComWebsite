@@ -36,7 +36,8 @@ class Apifeatures {
         const currentpage = Number(this.querystr.currentpage) || 1;
         const skip = resultperpage*(currentpage-1)
 
-        this.query = this.query.limit(resultperpage).skip(skip)
+        this.query = this.query.limit(resultperpage).skip(skip);
+        return this;
     }
 };
 
