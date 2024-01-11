@@ -3,6 +3,7 @@ const { registerUser, loginuser, logout, forgetpassword, resetPassword, getUserD
 const { isAuthenticatedUser,authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
 
+
 router.route("/register").post(registerUser);
 router.route("/login").post(loginuser);
 router.route("/password/forgot/").post(forgetpassword);
