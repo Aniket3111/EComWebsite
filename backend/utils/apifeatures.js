@@ -34,8 +34,8 @@ class Apifeatures {
     return this;
   }
   pagination(resultperpage) {
-    const currentpage = Number(this.querystr.currentpage) || 1;
-    const skip = resultperpage * (currentpage - 1);
+    const currentPage = Number(this.querystr.page) || 1;
+    const skip = resultperpage * (currentPage - 1);
 
     this.query = this.query.limit(resultperpage).skip(skip);
     return this;
