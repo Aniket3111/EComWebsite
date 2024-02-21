@@ -24,7 +24,6 @@ exports.registerUser = catchAsyncerrors(async (req, res, next) => {
       public_id: myCloud.public_id,
       url: myCloud.secure_url,
     },
-    createdAt,
   });
 
   sendToken(user, 201, res);
@@ -69,11 +68,9 @@ exports.forgetpassword = catchAsyncerrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetpassworurl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/password/reset/${resettoken}`;
+  const resetpassworurl = `${process.env.FRONTEND_URL}/password/reset/${resettoken}`;
 
-  const message = `your password reset token is :- \n\n ${resetpassworurl}\n\n if you have not requested please ignore it`;
+  const message = `your password reset token is:- \n\n ${resetpassworurl}\n\n if you have not requested please ignore it`;
 
   try {
     await sendEmail({
@@ -102,7 +99,7 @@ exports.resetPassword = catchAsyncerrors(async (req, res, next) => {
     .update(req.params.token)
     .digest("hex");
 
-  const user = await user.findOne({
+  const user = await User.findOne({
     resetPasswordToken,
     resetPasswordExpired: { $gt: Date.now() },
   });
@@ -113,7 +110,7 @@ exports.resetPassword = catchAsyncerrors(async (req, res, next) => {
     );
   }
 
-  if (req.body.password !== req.body.confirmPassword) {
+  if (req.body.password !== req.body.confirmpassword) {
     return next(new ErrorHandler("Password does not match", 400));
   }
 

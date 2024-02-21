@@ -3,25 +3,26 @@ const Product = require("../models/productmodel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncerrors = require("../middleware/catchAsyncerrors");
 
+//create order
 exports.newOrder = catchAsyncerrors(async (req, res, next) => {
   const {
     shippingInfo,
-    OrderItem,
-    paymentinfo,
-    itemsprice,
-    taxprice,
-    shippingprice,
-    totalprice,
+    orderItems,
+    paymentInfo,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
   } = req.body;
 
   const order = await Order.create({
     shippingInfo,
-    OrderItem,
-    paymentinfo,
-    itemsprice,
-    taxprice,
-    shippingprice,
-    totalprice,
+    orderItems,
+    paymentInfo,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
     paidAt: Date.now(),
     user: req.user._id,
   });
@@ -61,7 +62,7 @@ exports.getallorders = catchAsyncerrors(async (req, res, next) => {
   const orders = await Order.find();
   let totalamount = 0;
   orders.forEach((order) => {
-    totalamount += order.totalprice;
+    totalamount += order.totalPrice;
   });
 
   res.status(200).json({
