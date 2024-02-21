@@ -19,8 +19,8 @@ const Footer = () => {
       </div>
       <div className="rightfooter">
         <h4>Follow Us</h4>
-        <a href="">Instagram</a>
-        <a href="">LinkedIn</a>
+        <a href="/sample">Instagram</a>
+        <a href="/sample">LinkedIn</a>
       </div>
     </footer>
   );
