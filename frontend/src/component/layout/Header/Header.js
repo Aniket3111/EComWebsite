@@ -4,9 +4,9 @@ import { ReactNavbar } from "overlay-navbar";
 import { MdAccountCircle } from "react-icons/md";
 import { MdSearch } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
-import logo from "../../../images/logo-2.png";
+import logo from "../../../images/blogo.png";
 const options = {
-  burgerColorHover: "#eb4034",
+  burgerColorHover: "#ad8a5d",
   logo,
   logoWidth: "10vmax",
   ProfileIconElement: MdAccountCircle,
@@ -14,7 +14,7 @@ const options = {
   CartIconElement: MdAddShoppingCart,
   navColor1: "white",
   logoHoverSize: "10px",
-  logoHoverColor: "#ec5320",
+  logoHoverColor: "#ad8a5d",
   searchIcon: "True",
   cartIcon: "True",
   profileIcon: "True",
@@ -25,23 +25,23 @@ const options = {
   link1Url: "/",
   logoUrl: "/",
   link2Url: "/products",
-  link3Ur1: "/contact",
-  link4Ur1: "/about",
+  link3Url: "/contact",
+  link4Url: "/about",
   link1Size: "1.3vmax",
   link1Color: "rgba(35, 35, 35,0.8)",
   nav1justifyContent: "flex-end",
   nav2justifyContent: "flex-end",
   nav3justifyContent: "flex-start",
   nav4justifyContent: "flex-start",
-  link1ColorHover: "#eb4034",
+  link1ColorHover: "#ad8a5d",
   link1Margin: "2vmax",
   profileIconUrl: "/login",
   profileIconColor: "rgba(35, 35,35,0.8)",
   searchIconColor: "rgba(35, 35,35,0.8)",
   cartIconColor: "rgba(35, 35, 35,0.8)",
-  searchIconColorHover: "#ec5320",
-  profileIconColorHover: "#ec5320",
-  cartIconColorHover: "#ec5320",
+  searchIconColorHover: "#ad8a5d",
+  profileIconColorHover: "#ad8a5d",
+  cartIconColorHover: "#ad8a5d",
   cartIconMargin: "1vmax",
 };
 const Header = () => {

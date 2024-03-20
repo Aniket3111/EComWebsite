@@ -27,7 +27,7 @@ const Products = () => {
   const alert = useAlert();
 
   const [currentPage, setcurrentPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [price, setPrice] = useState([0, 250000]);
   const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
@@ -81,7 +81,7 @@ const Products = () => {
               valueLabelDisplay="auto"
               min={0}
               step={10}
-              max={25000}
+              max={250000}
             ></Slider>
             <Typography>Categories</Typography>
             <ul className="categoryBox">

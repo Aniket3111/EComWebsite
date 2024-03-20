@@ -28,7 +28,11 @@ const Home = () => {
           <MetaData title="SHOPEE" />
           <div className="banner">
             <p>
-              Welcome to<span style={{ color: "#ec5320" }}> Shopee</span>{" "}
+              Welcome to
+              <span style={{ color: "#ad8a5d", fontWeight: 600 }}>
+                {" "}
+                CloudNest
+              </span>{" "}
               Website
             </p>
             <h1>Find Amazing Products Below</h1>

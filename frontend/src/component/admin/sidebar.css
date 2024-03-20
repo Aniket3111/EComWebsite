@@ -1,0 +1,51 @@
+.sidebar{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 0;
+}
+.sidebar>a:first-child{
+    padding: 0;
+    display: flex;
+
+}
+.sidebar>a>img{
+    width: 50%;
+    margin: auto;
+    transition: all 0.5s;
+}
+.sidebar>a>img:hover{
+    filter: drop-shadow(0 0 10px #ad8a5d);
+}
+.sidebar>a{
+    text-decoration: none;
+    transition: all 0.5s;
+    color: rgba(0,0,0,0.493) !important;
+    padding: 2rem;
+    font: 200 1rem "Roboto";
+}
+.css-9l5vo-MuiCollapse-wrapperInner>a{
+    text-decoration: none;
+    transition: all 0.5s;
+    color: rgba(0,0,0,0.493) !important;
+    padding: 2rem;
+    font: 200 1rem "Roboto";
+}
+.sidebar>a:hover{
+    color: #ad8a5d !important;
+    transform: scale(1.1);
+}
+.sidebar a>p{
+    display: flex;
+    align-items:center;
+}
+.sidebar a>p>svg{
+    margin-right: 0.5rem;
+}
+.MuiTypography-root{
+    background-color: #fff !important;
+}
+.css-1bcfi89-MuiTreeItem-content{
+    background-color: #fff !important;
+    padding: 0 !important;
+}

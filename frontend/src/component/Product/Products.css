@@ -10,6 +10,8 @@
 .products{
     display: flex;
     min-height: 30vh;
+    width: 80%;
+    margin: auto;
     flex-wrap: wrap;
     padding: 0.5vmax;
     justify-content: center;

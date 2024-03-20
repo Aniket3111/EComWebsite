@@ -2,9 +2,10 @@ const Product = require("../models/productmodel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncerrors = require("../middleware/catchAsyncerrors");
 const Apifeatures = require("../utils/apifeatures");
+const cloudinary = require("cloudinary");
 
 exports.getAllProducts = catchAsyncerrors(async (req, res) => {
-  const resultperpage = 3;
+  const resultperpage = 8;
   const productscount = await Product.countDocuments();
   const apifeatures = new Apifeatures(Product.find(), req.query)
     .search()
@@ -24,6 +25,15 @@ exports.getAllProducts = catchAsyncerrors(async (req, res) => {
     filteredproductcount,
   });
 });
+
+//GET ALL PRODUCTS (admin)
+exports.getAdminProducts = catchAsyncerrors(async (req, res) => {
+  const products = await Product.find();
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
 // get product details
 
 exports.getProductdetails = catchAsyncerrors(async (req, res, next) => {
@@ -38,6 +48,23 @@ exports.getProductdetails = catchAsyncerrors(async (req, res, next) => {
 });
 
 exports.createProduct = catchAsyncerrors(async (req, res, next) => {
+  let images = [];
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+  const imagesLinks = [];
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "products",
+    });
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+  req.body.images = imagesLinks;
   req.body.user = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({
@@ -50,6 +77,33 @@ exports.updateProduct = catchAsyncerrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
     return next(new ErrorHandler("Product Not found", 404));
+  }
+
+  // images start here
+  let images = [];
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  if (images !== undefined) {
+    //deleting images from cloudinary
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+    }
+
+    const imagesLinks = [];
+    for (let i = 0; i < images.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(images[i], {
+        folder: "products",
+      });
+      imagesLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+    req.body.images = imagesLinks;
   }
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -68,6 +122,11 @@ exports.deleteProduct = catchAsyncerrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product Not found", 404));
   }
+
+  //deleting images from cloudinary
+  for (let i = 0; i < product.images.length; i++) {
+    await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+  }
   await product.remove();
   res.status(200).json({
     success: true,
@@ -76,14 +135,14 @@ exports.deleteProduct = catchAsyncerrors(async (req, res, next) => {
 });
 //create new review or update review
 exports.createproductreview = catchAsyncerrors(async (req, res, next) => {
-  const { rating, comment, productid } = req.body;
+  const { rating, comment, productId } = req.body;
   const review = {
     user: req.user._id,
     name: req.user.name,
     rating: Number(rating),
     comment,
   };
-  const product = await Product.findById(productid);
+  const product = await Product.findById(productId);
   const isreviewed = product.reviews.find(
     (rev) => rev.user.toString() === req.user._id.toString()
   );
@@ -122,7 +181,7 @@ exports.getproductreviews = catchAsyncerrors(async (req, res, next) => {
   });
 });
 exports.deletereview = catchAsyncerrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.productid);
+  const product = await Product.findById(req.query.productId);
   if (!product) {
     return next(new ErrorHandler("Product Not found", 404));
   }
@@ -134,10 +193,15 @@ exports.deletereview = catchAsyncerrors(async (req, res, next) => {
   reviews.forEach((rev) => {
     avg += rev.rating;
   });
-  const ratings = avg / reviews.length;
+  let ratings = 0;
+  if (reviews.length === 0) {
+    ratings = 0;
+  } else {
+    ratings = avg / reviews.length;
+  }
   const numofreviews = reviews.length;
   await Product.findByIdAndUpdate(
-    req.query.productid,
+    req.query.productId,
     {
       reviews,
       ratings,

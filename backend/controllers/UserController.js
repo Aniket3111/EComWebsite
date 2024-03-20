@@ -179,11 +179,11 @@ exports.updateProfile = catchAsyncerrors(async (req, res, next) => {
 });
 // get all user details admin
 exports.getallusers = catchAsyncerrors(async (req, res, next) => {
-  const user = await User.find();
+  const users = await User.find();
 
   res.status(200).json({
     success: true,
-    user,
+    users,
   });
 });
 
@@ -208,7 +208,7 @@ exports.updaterole = catchAsyncerrors(async (req, res, next) => {
     role: req.body.role,
   };
 
-  const user = await User.findByIdAndUpdate(req.params.id, newuserdata, {
+  await User.findByIdAndUpdate(req.params.id, newuserdata, {
     new: true,
     runValidators: true,
     useFindandModify: false,
@@ -220,12 +220,13 @@ exports.updaterole = catchAsyncerrors(async (req, res, next) => {
 //delete user--Admin
 exports.deleteuser = catchAsyncerrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  //we will  add cloudinary later
   if (!user) {
     return next(
-      new ErrorHandler(`User does not exist with id${req.params.id}`)
+      new ErrorHandler(`User does not exist with id${req.params.id}`, 400)
     );
   }
+  const imageid = user.avatar.public_id;
+  await cloudinary.v2.uploader.destroy(imageid);
   await user.remove();
 
   res.status(400).json({

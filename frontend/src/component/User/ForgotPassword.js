@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./ForgotPassword.css";
 import Loader from "../layout/Loader/Loader";
-import { useNavigate } from "react-router-dom";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
@@ -9,7 +8,6 @@ import { forgotPassword, clearErrors } from "../../actions/userActions";
 import { useAlert } from "react-alert";
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const alert = useAlert();
   const [email, setEmail] = useState("");
   const { error, message, loading } = useSelector(

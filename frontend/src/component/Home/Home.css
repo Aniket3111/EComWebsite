@@ -1,5 +1,8 @@
 .banner{
-    background-image: linear-gradient(to right,#635dc0,#3027ae);
+    background-image: url("../../images/srcc.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100vmin;
     display: flex;
     align-items: center;
@@ -9,7 +12,8 @@
 }
 .banner >h1{
     margin: 5vmax;
-    font: 600 2.5vmax "Roboto";
+    font: 600 3vmax "Roboto";
+    backdrop-filter:  blur(3px);
 }
 .banner >p{
     font: 300 1.4vmax "Roboto"
@@ -38,7 +42,7 @@
     background-color: #ffffff;
     position: absolute;
     top: 0%;
-    clip-path: polygon(100% 71%, 0% 100%, 100% 100%);
+    clip-path: polygon(100% 75%, 0% 100%, 100% 100%);
     left: 0%;
     max-width: 100%;
 }
@@ -77,8 +81,9 @@
     margin: 0.5vmax;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
-.productCard>div>span{
+.productCardSpan{
     margin: 0.5vmax;
     font: 300 0.7vmax "Roboto"
 }

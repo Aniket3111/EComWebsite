@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import { resetPassword, clearErrors } from "../../actions/userActions";
-import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { useParams } from "react-router-dom";

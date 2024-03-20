@@ -42,10 +42,10 @@ const UserOptions = ({ user }) => {
     });
   }
   function dashboard() {
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   }
   function order() {
-    navigate("/order");
+    navigate("/orders");
   }
   function account() {
     navigate("/account");

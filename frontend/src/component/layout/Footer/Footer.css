@@ -1,35 +1,13 @@
 footer{
     margin-top: 10vmax;
-    padding: 2vmax;
-    background-color: rgb(34,33,33);
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
-}
-.leftFooter{
-width: 20%;
-display: flex;
-flex-direction: column;
-align-items: center;
-
-}
-.leftFooter > h4{
-font-family: "Roboto";
-font-size: 1vmax;
-}
-.leftFooter > P{
- text-align: center;
- font-size: 1.2vmax;
- font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-   "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-.leftFooter > img{
-    width: 5vmax;
-    margin: 1vmax;
-    cursor: pointer;
+    border: 5px solid #ad8a5d;
 }
 .midfooter{
     width:60%;
+    margin: auto;
     text-align: center;
 }
 .midfooter > h1{
@@ -39,33 +17,48 @@ font-size: 1vmax;
 }
 .midfooter > p{
     max-width: 60%;
-    margin: 1vmax auto;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 5px auto;
+    font-family: "Roboto"
 }
-.rightfooter{
-    width: 20%;
+.menu {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-.rightfooter >h4{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.4vmax;
-text-decoration: underline;
-}
-.rightfooter>a{
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+  ul{
+    padding-inline-start: 0px !important;
+  }
+  .menu__item {
+    list-style: none;
+  }
+  .menu__link {
+    font-size: 1.2rem;
+    color: black;
+    font-family: "Roboto";
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
     text-decoration: none;
-    font-size: 1.3vmax;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: white;
-    transition: all 0.4s;
-    margin: 0.5vmax;
-}
-.rightfooter > a:hover{
-    color: #ec5320;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+  
+  .menu__link:hover {
+    opacity: 1;
+  }
+
+.mdimg{
+    margin-top: 15px;
+    width: 80px;
 }
 @media screen and (max-width: 800px){
 .logoReactNavbar {
     height: 70px!important;
+}
+.mdimg{
+    width: 70px;
 }
 }

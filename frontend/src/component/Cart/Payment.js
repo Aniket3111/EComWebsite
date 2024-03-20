@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
@@ -41,6 +41,7 @@ const Payment = () => {
     totalPrice: orderInfo.totalPrice,
   };
   const submitHandler = async (e) => {
+    alert.show("Checking Payment Credentials");
     e.preventDefault();
     payBtn.current.disabled = true;
     try {
@@ -68,7 +69,7 @@ const Payment = () => {
               line1: shippingInfo.address,
               city: shippingInfo.city,
               state: shippingInfo.state,
-              postal_code: shippingInfo.pinCode,
+              postal_code: shippingInfo.pincode,
               country: shippingInfo.country,
             },
           },
@@ -86,6 +87,7 @@ const Payment = () => {
           };
           dispatch(createOrder(order));
           navigate("/success");
+          alert.success("Payment Succesfull");
         } else {
           alert.error("There is issue while processing payment");
         }
